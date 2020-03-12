@@ -1,0 +1,31 @@
+#
+# ~/aliasrc
+#
+
+# avoid errors
+alias rm='rm -iv'
+
+# classic terminal commands
+alias \
+    ..='cd ..' \
+     ~='cd ~' \
+    mkdir='mkdir -pv'
+
+# access configs
+alias \
+    qtilecfg='vim ~/.config/qtile/config.py' \
+    alacfg='vim ~/.config/alacritty/alacritty.yml'
+
+# make things more readable
+alias \
+    ls='exa --color=always --group-directories-first -a' \
+    df='df -h' \
+    free='free -h' \
+    du='du -hs'
+
+# network and server
+alias \
+    pacup='sudo pacman -Syu' \
+    wifilist='nmcli device wifi list' \
+    startsrv='sudo systemctl start httpd.service mariadb.service' \
+    stopsrv='sudo systemctl stop httpd.service mariadb.service'
