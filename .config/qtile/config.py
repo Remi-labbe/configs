@@ -49,9 +49,10 @@ from libqtile import layout, bar, widget, hook
 #### KEYS ####
 
 mod = "mod4"
+myTerm = "alacritty"
+myConfig = "/home/remi/.config/qtile/config.py"
 
-def init_keys():
-    return [
+keys = [
             Key(
                 [mod], "Return",
                 lazy.spawn(myTerm)          #Open chosen terminal
@@ -120,66 +121,67 @@ def init_keys():
 
 #### GROUPS ####
 
-def init_group_names():
-    return [
-        "WWW",
-        "DEV",
-        "SYS",
-        "DOC",
-        "MED",
-        "RDM"]
+group_names = ["WWW",
+               "DEV",
+               "SYS",
+               "DOC",
+               "MED",
+               "RDM"]
 
-def init_groups():
-    return [Group(name) for name in group_names]
+groups = [Group(name) for name in group_names]
+
+for i, name in enumerate(group_names, 1):
+    keys.extend([
+        # mod1 + number of group = switch to group
+        Key([mod], str(i), lazy.group[name].toscreen()),
+
+        # mod1 + shift + number of group = switch to & move focused window to group
+        Key([mod, "shift"], str(i), lazy.window.togroup(name)),
+    ])
 
 #### COLORS ####
 
-def init_colors():
-    return [["#282a36", "#282a36"], # panel background
-            ["#434758", "#434758"], # background for current screen tab
-            ["#ffffff", "#ffffff"], # font color for group names
-            ["#505050", "#505050"], # font color for inactive group
-            ["#000000", "#000000"], # background for other screen tabs
-            ["#A77AC4", "#A77AC4"], # dark green gradiant for other screen tabs
-            ["#ff8247", "#ff8247"], # background color for network widget
-            ["#7197E7", "#7197E7"], # background color for pacman widget
-            ["#9AEDFE", "#9AEDFE"], # background color for cmus widget
-            ["#000000", "#000000"], # background color for clock widget
-            ["#434758", "#434758"]] # background color for systray widget
+colors =  [["#282a36", "#282a36"], # panel background
+          ["#434758", "#434758"], # background for current screen tab
+          ["#ffffff", "#ffffff"], # font color for group names
+          ["#505050", "#505050"], # font color for inactive group
+          ["#000000", "#000000"], # background for other screen tabs
+          ["#A77AC4", "#A77AC4"], # dark green gradiant for other screen tabs
+          ["#ff8247", "#ff8247"], # background color for network widget
+          ["#7197E7", "#7197E7"], # background color for pacman widget
+          ["#9AEDFE", "#9AEDFE"], # background color for cmus widget
+          ["#000000", "#000000"], # background color for clock widget
+          ["#434758", "#434758"]] # background color for systray widget
 
 #### LAYOUTS ####
 
-def init_border_args():
-    return {"border_width": 2}
+layout_theme = {"borderwidth": 2,
+                "margin": 5,
+                "border_focus":"AD69AF",
+                "border_normal":"1D2330"
+                }
 
-def init_layout_theme():
-    return {"borderwidth": 2,
-            "margin": 5,
-            "border_focus":"AD69AF",
-            "border_normal":"1D2330"
-            }
-
-def init_layouts():
-    return [
-    #layout.Stack(num_stacks=2, **layout_theme),
-    layout.MonadTall(**layout_theme), 
-    layout.Max(**layout_theme),
-    layout.Floating(**layout_theme)]
+layouts = [
+        #layout.Stack(num_stacks=2, **layout_theme),
+        layout.MonadTall(**layout_theme), 
+        layout.Max(**layout_theme),
+        layout.Floating(**layout_theme)]
 
 #### WIDGETS ####
 
-def init_widgets_defaults():
-    return dict(
-        font="Ubuntu",
-        fontsize=12,
-        padding=2,
-        background=colors[2])
+widget_defaults = dict(
+            font="Ubuntu",
+            fontsize=12,
+            padding=2,
+            background=colors[2])
+
+extension_defaults = widget_defaults.copy()
 
 #extension_defaults = widget_defaults.copy()
 
-def init_widgets_list():            
-    prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
-    widget_list = [
+prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
+            
+widget_list = [
             widget.Sep(
                 linewidth=0,
                 padding=6,
@@ -301,19 +303,16 @@ def init_widgets_list():
                 foreground=colors[2],
                 background=colors[0]
                 )]
-    return widget_list
 
 #### SCREENS ####
 
-def init_screens():
-    return [
-        Screen(top=bar.Bar(widgets=init_widgets_list(), opacity=0.8, size=20)),
-        Screen(top=bar.Bar(widgets=init_widgets_list(), opacity=0.8, size=20))]
+screens = [
+        Screen(top=bar.Bar(widgets=widget_list, opacity=0.8, size=20)),
+        Screen(top=bar.Bar(widgets=widget_list, opacity=0.8, size=20))]
 
 #### FLOATING ####
 
-def init_mouse():
-    return [
+mouse = [
         Drag([mod], "Button1", lazy.window.set_position_floating(),
              start=lazy.window.get_position()),
         Drag([mod], "Button3", lazy.window.set_size_floating(),
@@ -345,34 +344,8 @@ floating_layout = layout.Floating(float_rules=[
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 
-#### MAIN INIT ####
-
-if __name__ in ["config", "__main__"]:
-    myTerm = "alacritty"
-    myConfig = "/home/remi/.config/qtile/config.py"
-
-    colors = init_colors()
-    keys = init_keys()
-    mouse = init_mouse()
-    group_names = init_group_names()
-    groups = init_groups()
-    layout_theme = init_layout_theme()
-    border_args = init_border_args
-    layouts = init_layouts()
-    screens = init_screens()
-    widget_defaults = init_widgets_defaults()
-    widgets_list = init_widgets_list()
-    
 #### LAYOUT KEYBINDS ####
 
-for i, name in enumerate(group_names, 1):
-    keys.extend([
-        # mod1 + number of group = switch to group
-        Key([mod], str(i), lazy.group[name].toscreen()),
-
-        # mod1 + shift + number of group = switch to & move focused window to group
-        Key([mod, "shift"], str(i), lazy.window.togroup(name)),
-    ])
 
 #### STARTUP ####
 
