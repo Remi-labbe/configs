@@ -1,0 +1,22 @@
+#!/bin/sh
+
+full_bat=0
+curr_bat=0
+icon="🔋"
+
+for battery in /sys/class/power_supply/BAT?
+do
+    full_bat=$(($full_bat+$(cat "$battery"/energy_full)))
+    curr_bat=$(($curr_bat+$(cat "$battery"/energy_now)))
+    bat_status=$(cat "$battery"/status)
+
+    [ "$bat_status" = "Charging" ] && icon="🔌"
+done
+
+curr_percent=$(($curr_bat*100))
+curr_percent=$(($curr_percent/$full_bat))
+
+[ "$icon" = "🔋" ] && [ "$curr_percent" -le 25 ] && icon+="❗"
+[ "$icon" = "🔌" ] && [ "$curr_percent" -ge 95 ] && icon="⚡ "
+
+echo "$icon$curr_percent%"
