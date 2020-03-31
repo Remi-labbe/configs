@@ -7,9 +7,14 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()		" required, all plugins must appear after this line.
 
-Plugin 'vim-airline/vim-airline'					" Airline
-Plugin 'vim-airline/vim-airline-themes'				" Airline Themes
+" Plugin 'vim-airline/vim-airline'					" Airline
+" Plugin 'vim-airline/vim-airline-themes'				" Airline Themes
+Plugin 'itchyny/lightline.vim'                      " vim lightline
+Plugin 'mengelbrecht/lightline-bufferline'          " Adding top line to lightline
 Plugin 'hdima/python-syntax'                        " enhanced python highlighting
+Plugin 'PotatoesMaster/i3-vim-syntax'               " Adds i3 config highlighting
+Plugin 'ap/vim-css-color'                            " hex color code highlighting
+" Plugin 'mboughaba/i3config.vim'
 " Plugin 'python-mode/python-mode'
 
 call vundle#end()		" required, all plugins must appear before this line.
@@ -19,9 +24,21 @@ call vundle#end()		" required, all plugins must appear before this line.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Setting airline theme
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline_theme='angr'
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline_powerline_fonts = 1
+" let g:airline_theme='angr'
+
+" Setting lightline theme
+if !has('gui_running')
+  set t_Co=256
+endif
+
+let g:lightline                  = {'colorscheme':'wombat'}
+"let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
+"let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+"let g:lightline.component_type   = {'buffers': 'tabsel'}
+
+"autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
 " Uncomment to prevent non-normal modes showing in powerline and below powerline.
 set noshowmode
