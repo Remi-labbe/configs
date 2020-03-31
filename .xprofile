@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# This file runs when a DM logs you into a graphical env.
+# also sourced if using startx
+
+xrdb ~/.config/Xresources &
