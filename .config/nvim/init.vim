@@ -1,104 +1,85 @@
-"""  settings for VIM
+syntax on
+filetype plugin indent on
 
-let mapleader=","
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-
-call vundle#begin()		" required, all plugins must appear after this line.
-
-" Plugin 'vim-airline/vim-airline'					" Airline
-" Plugin 'vim-airline/vim-airline-themes'				" Airline Themes
-Plugin 'itchyny/lightline.vim'                      " vim lightline
-Plugin 'mengelbrecht/lightline-bufferline'          " Adding top line to lightline
-Plugin 'hdima/python-syntax'                        " enhanced python highlighting
-Plugin 'PotatoesMaster/i3-vim-syntax'               " Adds i3 config highlighting
-Plugin 'ap/vim-css-color'                            " hex color code highlighting
-" Plugin 'mboughaba/i3config.vim'
-" Plugin 'python-mode/python-mode'
-
-call vundle#end()		" required, all plugins must appear before this line.
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Visuals
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Setting airline theme
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline_powerline_fonts = 1
-" let g:airline_theme='angr'
-
-" Setting lightline theme
-if !has('gui_running')
-  set t_Co=256
-endif
-
-let g:lightline                  = {'colorscheme':'wombat'}
-"let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
-"let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
-"let g:lightline.component_type   = {'buffers': 'tabsel'}
-
-"autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
-
-" Uncomment to prevent non-normal modes showing in powerline and below powerline.
+set noerrorbells
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set shiftround
+set expandtab
+set smartindent
+set nu
+set nowrap
+set smartcase
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+set incsearch
 set noshowmode
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Line indexing, UI
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set number
 set laststatus=2
+set nohlsearch
+set cursorline
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Syntax
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set updatetime=50
 
-syntax enable
-set hlsearch
+set colorcolumn=80
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+
+" ===> Plugins
+call plug#begin('~/.vim/plugged')
+
+" Debugger Plugins
+"Plug 'puremourning/vimspector'
+"Plug 'szw/vim-maximizer'
+
+Plug 'leafgarland/typescript-vim'
+Plug 'gruvbox-community/gruvbox'
+Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
+Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'hdima/python-syntax'
+Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'ap/vim-css-color'
+Plug 'mbbill/undotree'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+call plug#end()
+
+colorscheme gruvbox
+
+let g:lightline = {
+      \ 'colorscheme': 'gruvbox',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'tabline': {
+      \   'left': [ ['buffers'] ],
+      \   'right': [ ['close'] ]
+      \ },
+      \ 'component_expand': {
+      \   'buffers': 'lightline#bufferline#buffers'
+      \ },
+      \ 'component_type': {
+      \   'buffers': 'tabsel'
+      \ }
+      \ }
+
+" highlight Search cterm=NONE ctermfg=grey ctermbg=blue
+
 " Automatically deletes all trailing whitespace on save.
-	autocmd BufWritePre * %s/\s\+$//e
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Splits, text, tab and indent related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
-set splitbelow splitright
+autocmd BufWritePre * %s/\s\+$//e
 
 " Enable auto-completion in vim commands (:)
 set wildmode=longest,list,full
 
-" Use spaces instead of tabs
-set expandtab
+" ===> command mode
+let mapleader=" "
 
-" Be smart when using tabs ;)
-set smarttab
-set autoindent
-set shiftround
-
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
-
-" line cunting
-set linebreak
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-colorscheme peachpuff
-hi LineNr ctermfg=242
-hi CursorLineNr ctermfg=15
-hi VertSplit ctermfg=8 ctermbg=0
-hi Statement ctermfg=3
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Mouse Scrolling
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set mouse=nicr
-
-
-set clipboard=unnamedplus
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
+nnoremap <leader>u :UndotreeShow<CR>
+nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+nnoremap <Leader>+ :vertical resize +5<CR>
+nnoremap <Leader>- :vertical resize -5<CR>

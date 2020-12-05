@@ -1,9 +1,5 @@
-!  ____ _____ 
-! |  _ \_   _|  Derek Taylor (DistroTube)
-! | | | || |    http://www.youtube.com/c/DistroTube
-! | |_| || |    http://www.gitlab.com/dwt1/ 
-! |____/ |_|  	
-
+! Remi Labbe Xresources config
+! github.con/Remi-labbe
 
 Xft.dpi: 96
 Xft.antialias: true
@@ -34,89 +30,44 @@ XTerm*savelines: 16384
 ! double-click to select whole URLs :D
 XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 
-URxvt*imLocale: en_US.UTF-8
-URxvt*termName: rxvt-unicode-256color
-Urxvt*buffered: false
-URxvt.intensityStyles: false
-Rxvt.font: xft:UbuntuMono Nerd Font:size=13, \
-            xft:Inconsolata Nerd Font Mono:size=13, \
-            xft:DejaVuSansMono Nerd Font:size=13, \
-            xft:DroidSansMono Nerd Font:size=13, \
-            xft:FuraMono Nerd Font:size=13, \
-            xft:RobotoMono Nerd Font:size=13, \
-            xft:Noto Sans Mono:size=13, \
-            xft:Monospace:style=Medium:size=13  
-URxvt.saveLines: 2000
-URxvt.scrollBar: false
-URxvt.cursorColor: white
-
-!! Extensions
-URxvt.perl-ext-common: default,matcher,resize-font,url-select,keyboard-select,clipboard
-URxvt.colorUL: #4682B4
-!! url-select
-URxvt.keysym.M-u: perl:url-select:select_next
-URxvt.url-select.launcher: urxvt -e lynx -cfg=~/.lynx.cfg -lss=~/.lynx.lss
-URxvt.url-select.underline: true
-!! keyboard-select:
-URxvt.keysym.M-Escape: perl:keyboard-select:activate
-!! resize-font
-URxvt.resize-font.smaller: C-j
-URxvt.resize-font.bigger:  C-k
-!! Matcher
-URxvt.url-launcher:	urxvt -e lynx -cfg=~/.lynx.cfg -lss=~/.lynx.lss
-URxvt.matcher.button: 1
-!!clipboard
-URxvt.keysym.M-c: perl:clipboard:copy
-URxvt.keysym.M-v: perl:clipboard:paste
-URxvt*depth: 32
-
-
-! Dracula Xresources palette
-!! COLORS
-
-! special
-URxvt*foreground:   #bbc5ff
-URxvt*background:   [95]#292d3e
-URxvt*cursorColor:  #bbc5ff
-
 XTerm*foreground: #bbc5ff
 XTerm*background: #292d3e
 XTerm*cursorColor: #bbc5ff
 
 ! special
-*.foreground:   #c5c8c6
-*.background:   #1d1f21
-*.cursorColor:  #c5c8c6
+*.foreground:   #ebdbb2
+*.background:   #282828
+*.cursorColor:  #ebdbb2
 
 ! black
-*.color0:       #1d1f21
-*.color8:       #969896
+*.color0:       #20201d
+*.color8:       #928374
 
 ! red
-*.color1:       #cc342b
-*.color9:       #cc342b
+*.color1:       #cc241d
+*.color9:       #fb4934
 
 ! green
-*.color2:       #198844
-*.color10:      #198844
+*.color2:       #98971a
+*.color10:      #b8bb26
 
 ! yellow
-*.color3:       #fba922
-*.color11:      #fba922
+*.color3:       #d79921
+*.color11:      #fabd2f
 
 ! blue
-*.color4:       #3971ed
-*.color12:      #3971ed
+*.color4:       #458588
+*.color12:      #83a598
 
 ! magenta
-*.color5:       #a36ac7
-*.color13:      #a36ac7
+*.color5:       #b16286
+*.color13:      #d3869b
 
 ! cyan
-*.color6:       #3971ed
-*.color14:      #3971ed
+*.color6:       #689d6a
+*.color14:      #8ec07c
 
 ! white
-*.color7:       #c5c8c6
-*.color15:      #ffffff
+*.color7:       #a89984
+*.color15:      #ebdbb2
 

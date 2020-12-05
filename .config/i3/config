@@ -12,9 +12,9 @@ set $shutdown sudo -A shutdown -h now
 
 # Gaps
 for_window [class="^.*"] border pixel 2
-client.focused      #bd83f9 #bd83f9 #bd83f9 #bd83f9
+client.focused      #d79921 #d79921 #d79921 #d79921
 client.urgent       #ff5555 #ff5555 #ff5555 #ff5555
-gaps inner 10
+gaps inner 15
 gaps outer 5
 
 # Font for window titles. Will also be used by the bar unless a different font

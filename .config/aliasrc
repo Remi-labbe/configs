@@ -9,8 +9,8 @@ alias \
     v='$EDITOR' \
     ..='cd ..' \
      ~='cd ~' \
-    mkdir='mkdir -pv'
-
+    mkdir='mkdir -pv'\
+    cat='bat'
 # access configs
 alias \
     qtilecfg='$EDITOR ~/.config/qtile/config.py' \
