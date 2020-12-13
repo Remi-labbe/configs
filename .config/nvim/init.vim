@@ -1,6 +1,7 @@
 syntax on
 filetype plugin indent on
 
+set title
 set noerrorbells
 set tabstop=4 softtabstop=4
 set shiftwidth=4
@@ -26,7 +27,7 @@ set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 " ===> Plugins
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 " Debugger Plugins
 "Plug 'puremourning/vimspector'
@@ -39,6 +40,7 @@ Plug 'mengelbrecht/lightline-bufferline'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'hdima/python-syntax'
 Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'dag/vim-fish'
 Plug 'ap/vim-css-color'
 Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -71,6 +73,8 @@ autocmd BufWritePre * %s/\s\+$//e
 
 " Enable auto-completion in vim commands (:)
 set wildmode=longest,list,full
+
+set clipboard+=unnamedplus
 
 " ===> command mode
 let mapleader=" "
